@@ -40,7 +40,7 @@ public class ContratacionesServlet extends HttpServlet {
             String idStr = request.getParameter("idContratacion");
 
             if (idStr == null || idStr.isEmpty()) {
-                System.out.println("❌ Error: idContratacion es nulo o vacío");
+                System.out.println(" Error: idContratacion es nulo o vacío");
                 response.sendRedirect("contrataciones");
                 return;
             }
@@ -49,7 +49,7 @@ public class ContratacionesServlet extends HttpServlet {
             try {
                 id = Integer.parseInt(idStr);
             } catch (NumberFormatException e) {
-                System.out.println("❌ Error: idContratacion no es un número válido -> " + idStr);
+                System.out.println(" Error: idContratacion no es un número válido -> " + idStr);
                 response.sendRedirect("contrataciones");
                 return;
             }
@@ -61,7 +61,7 @@ public class ContratacionesServlet extends HttpServlet {
                 request.setAttribute("contratacion", contratacion);
                 request.getRequestDispatcher("editarTipoContratacion.jsp").forward(request, response);
             } else {
-                System.out.println("❌ Error: No se encontró la contratación con ID " + id);
+                System.out.println(" Error: No se encontró la contratación con ID " + id);
                 response.sendRedirect("contrataciones");
             }
         }
@@ -71,7 +71,7 @@ public class ContratacionesServlet extends HttpServlet {
             String idStr = request.getParameter("idContratacion");
 
             if (idStr == null || idStr.isEmpty()) {
-                System.out.println("❌ Error: idContratacion es nulo o vacío para eliminación");
+                System.out.println(" Error: idContratacion es nulo o vacío para eliminación");
                 response.sendRedirect("contrataciones");
                 return;
             }
@@ -80,7 +80,7 @@ public class ContratacionesServlet extends HttpServlet {
             try {
                 idContratacion = Integer.parseInt(idStr);
             } catch (NumberFormatException e) {
-                System.out.println("❌ Error: idContratacion no es un número válido para eliminación");
+                System.out.println(" Error: idContratacion no es un número válido para eliminación");
                 response.sendRedirect("contrataciones");
                 return;
             }
@@ -88,9 +88,9 @@ public class ContratacionesServlet extends HttpServlet {
             boolean eliminado = dao.eliminarContratacion(idContratacion);
 
             if (eliminado) {
-                System.out.println("✅ Contratación eliminada correctamente.");
+                System.out.println(" Contratación eliminada correctamente.");
             } else {
-                System.out.println("❌ Error al eliminar contratación.");
+                System.out.println(" Error al eliminar contratación.");
             }
 
             response.sendRedirect("contrataciones");
@@ -115,7 +115,7 @@ public class ContratacionesServlet extends HttpServlet {
 
                 // Validar que ningún campo sea nulo
                 if (fechaContratacion == null || fechaContratacion.isEmpty()) {
-                    System.out.println("❌ Error: La fecha de contratación es nula o vacía.");
+                    System.out.println(" Error: La fecha de contratación es nula o vacía.");
                     response.sendRedirect("contrataciones");
                     return;
                 }
@@ -124,13 +124,13 @@ public class ContratacionesServlet extends HttpServlet {
                 boolean insertado = dao.insertarContratacion(nuevaContratacion);
 
                 if (insertado) {
-                    System.out.println("✅ Contratación agregada correctamente.");
+                    System.out.println(" Contratación agregada correctamente.");
                     processRequest(request, response);
                 } else {
-                    System.out.println("❌ Error al agregar la contratación.");
+                    System.out.println(" Error al agregar la contratación.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("❌ Error: Formato de número inválido - " + e.getMessage());
+                System.out.println(" Error: Formato de número inválido - " + e.getMessage());
             }
         }
 

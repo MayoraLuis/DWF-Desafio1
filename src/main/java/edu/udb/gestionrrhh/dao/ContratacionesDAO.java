@@ -30,11 +30,11 @@ public class ContratacionesDAO {
                 contrataciones.add(contratacion);
             }
 
-            System.out.println("✅ Se obtuvieron " + contrataciones.size() + " contrataciones de la BD.");
+            System.out.println(" Se obtuvieron " + contrataciones.size() + " contrataciones de la BD.");
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("❌ Error al obtener contrataciones: " + e.getMessage());
+            System.out.println(" Error al obtener contrataciones: " + e.getMessage());
         }
         return contrataciones;
     }
@@ -56,15 +56,15 @@ public class ContratacionesDAO {
 
             int filasAfectadas = stmt.executeUpdate(); // Devuelve el número de filas afectadas
             if (filasAfectadas > 0) {
-                System.out.println("✅ Contratación insertada correctamente en la base de datos.");
+                System.out.println(" Contratación insertada correctamente en la base de datos.");
                 return true;
             } else {
-                System.out.println("❌ No se insertó la contratación.");
+                System.out.println(" No se insertó la contratación.");
                 return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("❌ Error SQL al insertar contratación: " + e.getMessage());
+            System.out.println(" Error SQL al insertar contratación: " + e.getMessage());
             return false;
         }
     }
@@ -91,13 +91,13 @@ public class ContratacionesDAO {
                         rs.getDouble("salario"),
                         rs.getBoolean("estado")
                 );
-                System.out.println("✅ Contratación encontrada: " + contratacion.getIdContratacion());
+                System.out.println(" Contratación encontrada: " + contratacion.getIdContratacion());
             } else {
-                System.out.println("❌ No se encontró contratación con ID: " + id);
+                System.out.println(" No se encontró contratación con ID: " + id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("❌ Error al obtener contratación por ID: " + e.getMessage());
+            System.out.println(" Error al obtener contratación por ID: " + e.getMessage());
         }
         return contratacion;
     }
@@ -120,14 +120,14 @@ public class ContratacionesDAO {
 
             int filasAfectadas = stmt.executeUpdate();
             if (filasAfectadas > 0) {
-                System.out.println("✅ Contratación actualizada correctamente.");
+                System.out.println(" Contratación actualizada correctamente.");
             } else {
-                System.out.println("❌ No se encontró contratación para actualizar.");
+                System.out.println(" No se encontró contratación para actualizar.");
             }
             return filasAfectadas > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("❌ Error al actualizar contratación: " + e.getMessage());
+            System.out.println(" Error al actualizar contratación: " + e.getMessage());
             return false;
         }
     }
@@ -142,14 +142,14 @@ public class ContratacionesDAO {
             stmt.setInt(1, idContratacion);
             int filasAfectadas = stmt.executeUpdate();
             if (filasAfectadas > 0) {
-                System.out.println("✅ Contratación eliminada correctamente.");
+                System.out.println(" Contratación eliminada correctamente.");
             } else {
-                System.out.println("❌ No se encontró contratación para eliminar.");
+                System.out.println(" No se encontró contratación para eliminar.");
             }
             return filasAfectadas > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("❌ Error al eliminar contratación: " + e.getMessage());
+            System.out.println(" Error al eliminar contratación: " + e.getMessage());
             return false;
         }
     }

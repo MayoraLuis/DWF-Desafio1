@@ -51,7 +51,7 @@ public class TipoContratacionDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("❌ Error al obtener tipo de contratación por ID: " + e.getMessage());
+            System.out.println(" Error al obtener tipo de contratación por ID: " + e.getMessage());
         }
         return tipo;
     }
@@ -88,7 +88,7 @@ public class TipoContratacionDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("❌ Error al actualizar tipo de contratación: " + e.getMessage());
+            System.out.println(" Error al actualizar tipo de contratación: " + e.getMessage());
             return false;
         }
     }
@@ -105,15 +105,15 @@ public class TipoContratacionDAO {
             int filasAfectadas = stmt.executeUpdate();
 
             if (filasAfectadas > 0) {
-                System.out.println("✅ Tipo de contratación eliminado correctamente.");
+                System.out.println(" Tipo de contratación eliminado correctamente.");
                 return true;
             } else {
-                System.out.println("❌ No se encontró el tipo de contratación con ID " + idTipoContratacion);
+                System.out.println(" No se encontró el tipo de contratación con ID " + idTipoContratacion);
                 return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("❌ Error SQL al eliminar tipo de contratación: " + e.getMessage());
+            System.out.println(" Error SQL al eliminar tipo de contratación: " + e.getMessage());
             return false;
         }
     }

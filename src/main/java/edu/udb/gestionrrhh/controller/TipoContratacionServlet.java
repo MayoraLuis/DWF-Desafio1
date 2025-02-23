@@ -37,10 +37,10 @@ public class TipoContratacionServlet extends HttpServlet {
             String idStr = request.getParameter("idTipoContratacion");
 
             // 🚨 Depuración en consola
-            System.out.println("📌 Acción Eliminar - ID recibido: " + idStr);
+            System.out.println(" Acción Eliminar - ID recibido: " + idStr);
 
             if (idStr == null || idStr.isEmpty()) {
-                System.out.println("❌ Error: idTipoContratacion es null o vacío");
+                System.out.println(" Error: idTipoContratacion es null o vacío");
                 response.sendRedirect("tiposContratacion");
                 return;
             }
@@ -49,7 +49,7 @@ public class TipoContratacionServlet extends HttpServlet {
             try {
                 id = Integer.parseInt(idStr);
             } catch (NumberFormatException e) {
-                System.out.println("❌ Error: idTipoContratacion no es un número válido -> " + idStr);
+                System.out.println("Error: idTipoContratacion no es un número válido -> " + idStr);
                 response.sendRedirect("tiposContratacion");
                 return;
             }
@@ -57,9 +57,9 @@ public class TipoContratacionServlet extends HttpServlet {
             boolean eliminado = dao.eliminarTipoContratacion(id);
 
             if (eliminado) {
-                System.out.println("✅ Tipo de contratación eliminado correctamente.");
+                System.out.println(" Tipo de contratación eliminado correctamente.");
             } else {
-                System.out.println("❌ Error al eliminar tipo de contratación. Puede estar relacionado con restricciones de clave foránea.");
+                System.out.println(" Error al eliminar tipo de contratación. Puede estar relacionado con restricciones de clave foránea.");
             }
 
             response.sendRedirect("tiposContratacion");
@@ -85,7 +85,7 @@ if ("actualizar".equals(action)) {
         String idStr = request.getParameter("idTipoContratacion");
 
         if (idStr == null || idStr.isEmpty()) {
-            System.out.println("❌ Error: idTipoContratacion es nulo o vacío");
+            System.out.println(" Error: idTipoContratacion es nulo o vacío");
             response.sendRedirect("contrataciones");
             return;
         }
@@ -94,7 +94,7 @@ if ("actualizar".equals(action)) {
         try {
             idTipoContratacion = Integer.parseInt(idStr);
         } catch (NumberFormatException e) {
-            System.out.println("❌ Error: idTipoContratacion no es un número válido -> " + idStr);
+            System.out.println(" Error: idTipoContratacion no es un número válido -> " + idStr);
             response.sendRedirect("contrataciones");
             return;
         }
