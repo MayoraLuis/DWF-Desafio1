@@ -33,14 +33,14 @@ public class TipoContratacionDAO {
     }
 
     // Obtener un tipo de contratación por ID
-    public TipoContratacion obtenerTipoContratacionPorId(int idTipoContratacion) {
-        String sql = "SELECT * FROM TipoContratacion WHERE idTipoContratacion = ?";
+    public TipoContratacion obtenerTipoContratacionPorId(int id) {
         TipoContratacion tipo = null;
+        String sql = "SELECT * FROM tiposContratacion WHERE idTipoContratacion = ?";
 
         try (Connection conn = ConexionBD.obtenerConexion();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, idTipoContratacion);
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -51,7 +51,7 @@ public class TipoContratacionDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error al obtener tipo de contratación por ID: " + e.getMessage());
+            System.out.println("❌ Error al obtener tipo de contratación por ID: " + e.getMessage());
         }
         return tipo;
     }
@@ -75,7 +75,7 @@ public class TipoContratacionDAO {
 
     // Actualizar un tipo de contratación existente
     public boolean actualizarTipoContratacion(TipoContratacion tipo) {
-        String sql = "UPDATE TipoContratacion SET tipoContratacion=? WHERE idTipoContratacion=?";
+        String sql = "UPDATE TipoContratacion SET tipoContratacion = ? WHERE idTipoContratacion = ?";
 
         try (Connection conn = ConexionBD.obtenerConexion();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -83,34 +83,37 @@ public class TipoContratacionDAO {
             stmt.setString(1, tipo.getTipoContratacion());
             stmt.setInt(2, tipo.getIdTipoContratacion());
 
-            return stmt.executeUpdate() > 0;
+            int filasAfectadas = stmt.executeUpdate();
+            return filasAfectadas > 0;
+
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error al actualizar tipo de contratación: " + e.getMessage());
+            System.out.println("❌ Error al actualizar tipo de contratación: " + e.getMessage());
             return false;
         }
     }
 
     // Eliminar un tipo de contratación
     public boolean eliminarTipoContratacion(int idTipoContratacion) {
-        String sql = "DELETE FROM TipoContratacion WHERE idTipoContratacion=?";
+        String sql = "DELETE FROM tiposContratacion WHERE idTipoContratacion=?";
 
         try (Connection conn = ConexionBD.obtenerConexion();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idTipoContratacion);
+
             int filasAfectadas = stmt.executeUpdate();
 
             if (filasAfectadas > 0) {
-                System.out.println("Tipo de contratación eliminado correctamente.");
+                System.out.println("✅ Tipo de contratación eliminado correctamente.");
                 return true;
             } else {
-                System.out.println("No se encontró el tipo de contratación con ID: " + idTipoContratacion);
+                System.out.println("❌ No se encontró el tipo de contratación con ID " + idTipoContratacion);
                 return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error al eliminar tipo de contratación: " + e.getMessage());
+            System.out.println("❌ Error SQL al eliminar tipo de contratación: " + e.getMessage());
             return false;
         }
     }

@@ -52,9 +52,14 @@
             <td>${tipo.idTipoContratacion}</td>
             <td>${tipo.tipoContratacion}</td>
             <td>
-                <a href="tiposContratacion?action=editar&idTipoContratacion=${tipo.idTipoContratacion}" class="btn btn-warning btn-sm">Editar</a>
-                <a href="tiposContratacion?action=eliminar&idTipoContratacion=${tipo.idTipoContratacion}" class="btn btn-danger btn-sm"
-                   onclick="return confirm('¿Seguro que quieres eliminar este tipo de contratación?');">Eliminar</a>
+                <a href="tiposContratacion?action=editar&idTipoContratacion=${tipoContratacion.idTipoContratacion}"
+                   class="btn btn-warning btn-sm">✏ Editar</a>
+
+                <a href="tiposContratacion?action=eliminar&idTipoContratacion=${tipoContratacion.idTipoContratacion}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Eliminar este tipo de contratación?');">
+                    🗑 Eliminar
+                </a>
             </td>
         </tr>
     </c:forEach>

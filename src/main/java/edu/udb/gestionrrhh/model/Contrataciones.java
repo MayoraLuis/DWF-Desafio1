@@ -10,8 +10,7 @@ public class Contrataciones {
     private double salario;
     private boolean estado;
 
-    public Contrataciones() {}
-
+    //  Constructor
     public Contrataciones(int idContratacion, int idDepartamento, int idEmpleado, int idCargo, int idTipoContratacion, String fechaContratacion, double salario, boolean estado) {
         this.idContratacion = idContratacion;
         this.idDepartamento = idDepartamento;
@@ -23,28 +22,68 @@ public class Contrataciones {
         this.estado = estado;
     }
 
-    public int getIdContratacion() { return idContratacion; }
-    public void setIdContratacion(int idContratacion) { this.idContratacion = idContratacion; }
+    //  Getters y Setters
+    public int getIdContratacion() {
+        return idContratacion;
+    }
 
-    public int getIdDepartamento() { return idDepartamento; }
-    public void setIdDepartamento(int idDepartamento) { this.idDepartamento = idDepartamento; }
+    public void setIdContratacion(int idContratacion) {
+        this.idContratacion = idContratacion;
+    }
 
-    public int getIdEmpleado() { return idEmpleado; }
-    public void setIdEmpleado(int idEmpleado) { this.idEmpleado = idEmpleado; }
+    public int getIdDepartamento() {
+        return idDepartamento;
+    }
 
-    public int getIdCargo() { return idCargo; }
-    public void setIdCargo(int idCargo) { this.idCargo = idCargo; }
+    public void setIdDepartamento(int idDepartamento) {
+        this.idDepartamento = idDepartamento;
+    }
 
-    public int getIdTipoContratacion() { return idTipoContratacion; }
-    public void setIdTipoContratacion(int idTipoContratacion) { this.idTipoContratacion = idTipoContratacion; }
+    public int getIdEmpleado() {
+        return idEmpleado;
+    }
 
-    public String getFechaContratacion() { return fechaContratacion; }
-    public void setFechaContratacion(String fechaContratacion) { this.fechaContratacion = fechaContratacion; }
+    public void setIdEmpleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
 
-    public double getSalario() { return salario; }
-    public void setSalario(double salario) { this.salario = salario; }
+    public int getIdCargo() {
+        return idCargo;
+    }
 
-    public boolean isEstado() { return estado; }
-    public void setEstado(boolean estado) { this.estado = estado; }
+    public void setIdCargo(int idCargo) {
+        this.idCargo = idCargo;
+    }
+
+    public int getIdTipoContratacion() {
+        return idTipoContratacion;
+    }
+
+    public void setIdTipoContratacion(int idTipoContratacion) {
+        this.idTipoContratacion = idTipoContratacion;
+    }
+
+    public String getFechaContratacion() {
+        return fechaContratacion;
+    }
+
+    public void setFechaContratacion(String fechaContratacion) {
+        this.fechaContratacion = fechaContratacion;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
 }
-

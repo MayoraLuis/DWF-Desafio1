@@ -21,22 +21,26 @@ public class TipoContratacionServlet extends HttpServlet {
         request.setAttribute("tiposContratacion", lista);
         request.getRequestDispatcher("tiposContratacion.jsp").forward(request, response);
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        TipoContratacionDAO dao = new TipoContratacionDAO();
 
         if (action == null) {
             processRequest(request, response);
             return;
         }
 
-        if ("editar".equals(action)) {
+        TipoContratacionDAO dao = new TipoContratacionDAO();
+
+        if ("eliminar".equals(action)) {
             String idStr = request.getParameter("idTipoContratacion");
+
+            // 🚨 Depuración en consola
+            System.out.println("📌 Acción Eliminar - ID recibido: " + idStr);
+
             if (idStr == null || idStr.isEmpty()) {
-                System.out.println(" Error: idTipoContratacion es nulo o vacío.");
+                System.out.println("❌ Error: idTipoContratacion es null o vacío");
                 response.sendRedirect("tiposContratacion");
                 return;
             }
@@ -45,33 +49,7 @@ public class TipoContratacionServlet extends HttpServlet {
             try {
                 id = Integer.parseInt(idStr);
             } catch (NumberFormatException e) {
-                System.out.println(" Error: idTipoContratacion no es un número válido.");
-                response.sendRedirect("tiposContratacion");
-                return;
-            }
-
-            TipoContratacion tipo = dao.obtenerTipoContratacionPorId(id);
-            if (tipo != null) {
-                request.setAttribute("tipoContratacion", tipo);
-                request.getRequestDispatcher("editarTipoContratacion.jsp").forward(request, response);
-            } else {
-                System.out.println(" No se encontró el tipo de contratación con ID: " + id);
-                response.sendRedirect("tiposContratacion");
-            }
-        } else if ("eliminar".equals(action)) {
-            String idStr = request.getParameter("idTipoContratacion");
-
-            if (idStr == null || idStr.isEmpty()) {
-                System.out.println(" Error: idTipoContratacion es nulo o vacío para eliminación.");
-                response.sendRedirect("tiposContratacion");
-                return;
-            }
-
-            int id;
-            try {
-                id = Integer.parseInt(idStr);
-            } catch (NumberFormatException e) {
-                System.out.println(" Error: idTipoContratacion no es un número válido para eliminación.");
+                System.out.println("❌ Error: idTipoContratacion no es un número válido -> " + idStr);
                 response.sendRedirect("tiposContratacion");
                 return;
             }
@@ -79,12 +57,11 @@ public class TipoContratacionServlet extends HttpServlet {
             boolean eliminado = dao.eliminarTipoContratacion(id);
 
             if (eliminado) {
-                System.out.println(" Tipo de contratación eliminado correctamente.");
+                System.out.println("✅ Tipo de contratación eliminado correctamente.");
             } else {
-                System.out.println(" No se pudo eliminar el tipo de contratación con ID: " + id);
+                System.out.println("❌ Error al eliminar tipo de contratación. Puede estar relacionado con restricciones de clave foránea.");
             }
 
-            // Redirigir a la lista de tipos de contratación
             response.sendRedirect("tiposContratacion");
         }
     }
@@ -100,15 +77,45 @@ public class TipoContratacionServlet extends HttpServlet {
 
             TipoContratacion nuevo = new TipoContratacion(0, tipo);
             dao.insertarTipoContratacion(nuevo);
-        } else if ("actualizar".equals(action)) {
-            int id = Integer.parseInt(request.getParameter("idTipoContratacion"));
-            String tipo = request.getParameter("tipoContratacion");
-
-            TipoContratacion tipoActualizado = new TipoContratacion(id, tipo);
-            dao.actualizarTipoContratacion(tipoActualizado);
         }
 
-        response.sendRedirect("tiposContratacion");
+
+
+if ("actualizar".equals(action)) {
+        String idStr = request.getParameter("idTipoContratacion");
+
+        if (idStr == null || idStr.isEmpty()) {
+            System.out.println("❌ Error: idTipoContratacion es nulo o vacío");
+            response.sendRedirect("contrataciones");
+            return;
+        }
+
+        int idTipoContratacion;
+        try {
+            idTipoContratacion = Integer.parseInt(idStr);
+        } catch (NumberFormatException e) {
+            System.out.println("❌ Error: idTipoContratacion no es un número válido -> " + idStr);
+            response.sendRedirect("contrataciones");
+            return;
+        }
+
+        String tipoContratacion = request.getParameter("tipoContratacion");
+
+        // Crear objeto actualizado
+        TipoContratacion tipoActualizado = new TipoContratacion(idTipoContratacion, tipoContratacion);
+
+        // Ejecutar la actualización en la BD
+        boolean actualizado = dao.actualizarTipoContratacion(tipoActualizado);
+
+        if (actualizado) {
+            System.out.println("✅ Tipo de contratación actualizado con éxito.");
+        } else {
+            System.out.println("❌ Error al actualizar el tipo de contratación.");
+        }
     }
+
+    // Redirigir a la lista de contrataciones después de actualizar
+    response.sendRedirect("contrataciones");
+}
 }
 
